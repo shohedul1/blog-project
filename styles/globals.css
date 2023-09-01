@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  } 
+}*/
+
+a span p a{
+  transition: 0.5s;
+  display: block;
+  color: white;
+  padding: 10px;
+  background-color: red;
+}
+a span p a:hover{
+  
+  display: block;
+  color: white;
+  padding: 10px;
+  background-color: black;
+}
+.card img{
+  transition: 0.5s;
+}
+.card img:hover{
+  transform: scale(1.1);
+}
+.grid .col-span-3 a .text-lg p a{
+  margin-top: 10px;
+  display: inline-block;
+  color: white;
+  padding: 10px;
+  background-color: rgb(206, 47, 47);
+  border-radius: 10px;
+}
+.grid .col-span-3 a .text-lg p a:hover{
+  background-color: black;
+}
+.relative p a{
+  display: none;
+}
+
+@layer utilities{
+  .post-content p{
+    @apply pb-4 text-lg;
+  }
+  .post-content a{
+    @apply underline text-blue-400 hover:text-blue-600;
+  }
+  .post-content ul{
+    @apply pb-4 list-disc list-inside text-yellow-500 text-lg;
+  }
+  .post-content figure{
+    @apply pb-4;
+  }
+  .post-content figure figcaption{
+    @apply text-center py-2;
+  }
+  .post-content h1 {
+    @apply text-2xl py-2 font-bold  ;
+  }
+  .post-content h2 {
+    @apply text-xl py-2 font-bold  ;
+  }
+  
+  
+
+ 
+}
