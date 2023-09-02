@@ -3,6 +3,7 @@ import SiteHeader from '@/components/SiteHeader';
 import Link from 'next/link';
 import axios from 'axios';
 import Head from 'next/head';
+import Image from 'next/image';
 
 
 function Postlist() {
@@ -54,7 +55,7 @@ function Postlist() {
                     <>
                       <div key={post.id} className='card  bg-white p-3 w-full shadow-lg rounded-lg flex gap-5 flex-col transition duration-300 ease-in-out hover:shadow-2xl'>
                         <div className='overflow-hidden'>
-                          <img src={post.fimg_url} className='w-full h-64 object-cover' />
+                          {/* <Image  src={post.fimg_url} className='w-full h-64 object-cover' width={20} height={20}/> */}
                         </div>
                         <h2 className='font-bold text-3xl'>{post.title.rendered}</h2>
                         <Link href={`/blog/${post.id}`}>

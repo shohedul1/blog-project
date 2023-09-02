@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import Date from '@/components/Date';
+import Image from 'next/image';
 
-function index() {
+function Index() {
     const [users, setUsers] = useState([]);
     useEffect(() => {
       let url = (`http://localhost/wp-headless/wordpress/wp-json/wp/v2/pages?per_page=19`);
@@ -23,7 +24,7 @@ function index() {
               <>
               <li key={post.id} className='grid grid-cols-5 gap-4 mb-4 '>
                 <div className='col-span-2'>
-                    <img src={post.fimg_url} className='w-full h-64 object-cover rounded-xl'/>
+                 {/* <Image src={post.fimg_url} className='w-full h-64 object-cover rounded-xl' width={20} height={20}/> */}
                 </div>
                 <div className='col-span-3'>
                  <Link href={`/page/${post.id}`}>
@@ -55,4 +56,4 @@ function index() {
     )
 }
 
-export default index
+export default Index;
