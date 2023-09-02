@@ -3,8 +3,11 @@ import SiteHeader from '@/components/SiteHeader';
 import Link from 'next/link';
 import axios from 'axios';
 import Head from 'next/head';
-import Image from 'next/image';
-
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 function Postlist() {
   const [users, setUsers] = useState([]);
@@ -53,15 +56,26 @@ function Postlist() {
                 Object.keys(users).length ? users.map(post => {
                   return (
                     <>
-                      <div key={post.id} className='card  bg-white p-3 w-full shadow-lg rounded-lg flex gap-5 flex-col transition duration-300 ease-in-out hover:shadow-2xl'>
-                        <div className='overflow-hidden'>
-                          {/* <Image  src={post.fimg_url} className='w-full h-64 object-cover' width={20} height={20}/> */}
-                        </div>
-                        <h2 className='font-bold text-3xl'>{post.title.rendered}</h2>
-                        <Link href={`/blog/${post.id}`}>
-                          <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></span>
-                        </Link>
-                      </div>
+                      <Card sx={{ maxWidth: 345 }} key={post.id}>
+                        <CardActionArea>
+                          <CardMedia
+                            className='w-full h-64 object-cover'
+                            component="img"
+                            image={post.fimg_url}
+                            alt="green iguana"
+                          />
+                          <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                              {post.title.rendered}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              <Link href={`/blog/${post.id}`}>
+                                <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></span>
+                              </Link>
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Card>
                     </>
                   )
                 }) : (

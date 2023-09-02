@@ -1,59 +1,74 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-import Date from '@/components/Date';
-import Image from 'next/image';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 function Index() {
-    const [users, setUsers] = useState([]);
-    useEffect(() => {
-      let url = (`http://localhost/wp-headless/wordpress/wp-json/wp/v2/pages?per_page=19`);
-      axios.get(url).then((res) => {
-        const { data } = res;
-        setUsers(data);
-      });
-  
-    }, []);
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    let url = (`http://localhost/wp-headless/wordpress/wp-json/wp/v2/pages?per_page=19`);
+    axios.get(url).then((res) => {
+      const { data } = res;
+      setUsers(data);
+    });
+
+  }, []);
   console.log(users);
-    return (
-       
-        <ul>
-        {
-          Object.keys(users).length ? users.map(post => {
-            return (
-              <>
-              <li key={post.id} className='grid grid-cols-5 gap-4 mb-4 '>
-                <div className='col-span-2'>
-                 {/* <Image src={post.fimg_url} className='w-full h-64 object-cover rounded-xl' width={20} height={20}/> */}
-                </div>
-                <div className='col-span-3'>
-                 <Link href={`/page/${post.id}`}>
-                  <h1 className='py-4 text-blue-400 text-2xl hover:text-blue-600  '>
-                    {post.title.rendered}
-                  </h1>
-                  </Link>
-                  <div className='py-4'>
-                    {post.status} on <Date dateString={post.date}/>
-                  </div>
-                  <Link href={`/page/${post.id}`}>
-                  <div className='text-lg' dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></div>
-                  </Link>
-                </div>
-              </li>
+  return (
 
-              </>
-            )
-          }) : (
-            <div className='col-span-3 w-5 h-5 absolute left-1/2 top-1/2 rounded-full border-2 border-b-0 border-blue-500 animate-spin' />
+    <>
+      <main>
+        <section className='bg-slate-200 p-5 min-h-screen'>
+          <div className='max-w-5xl mx-auto text-center'>
+            <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-5'>
+              {
+                Object.keys(users).length ? users.map(post => {
+                  return (
+                    <>
+                    
 
-          )
+                      <Card sx={{ maxWidth: 345 }} key={post.id}>
+                        <CardActionArea>
+                          <CardMedia
+                            className='w-full h-64 object-cover'
+                            component="img"
+                            image={post.fimg_url}
+                            alt="green iguana"
+                          />
+                          <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                              {post.title.rendered}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              <Link href={`/blog/${post.id}`}>
+                                <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></span>
+                              </Link>
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Card>
+                    </>
+                  )
+                }) : (
+                  <div className='col-span-3 w-5 h-5 absolute left-1/2 top-1/2 rounded-full border-2 border-b-0 border-blue-500 animate-spin' />
 
-        }
+                )
+              }
+            </div>
 
-    </ul>
-        
+          </div>
+        </section>
+      </main>
 
-    )
+
+    </>
+
+
+  )
 }
 
 export default Index;
